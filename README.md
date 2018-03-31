@@ -16,7 +16,7 @@ cd LinkBookmarkWebApp
 pip install -r requirements.txt
 ```
 
-Provide the SECRET_KEY in the secrets.py file, in the same folder as settings.py (the secrets.py.template file is provided for this purpose).
+Then provide the SECRET_KEY in the secrets.py file, in the same folder as settings.py (the secrets.py.template file is provided for this purpose).
 
 ### Database choice
 
@@ -35,23 +35,24 @@ If you instead want to use MySQL or PostgreSQL, change the above section appropr
 
 ### Run the server
 
-After chosing the database, run this in the topmost folder:
+After chosing the database, run this in the LinkBookmarkWebApp folder to create the necessary database tables:
 
 ```
-.manage.py makemigrations
-.manage.py migrate
+./manage.py migrate
 ```
 
 And finally, run the server:
 
 ```
-.manage.py runserver
+./manage.py runserver
 ```
 
-You can also chose the port:
+Now you can go to <http://localhost:8000/> to view the app.
+
+Optionally, you can change the port:
 
 ```
-.manage.py runserver 8080
+./manage.py runserver 8080
 ```
 
 
