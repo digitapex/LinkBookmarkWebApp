@@ -16,11 +16,11 @@ cd LinkBookmarkWebApp
 pip install -r requirements.txt
 ```
 
-Then provide the SECRET_KEY in the secrets.py file, in the same folder as settings.py (the secrets.py.template file is provided for this purpose).
+Then provide the SECRET_KEY in the *secrets.py* file, which needs to be in the same folder as *settings.py* (the *secrets.py.template* file is provided for this purpose).
 
 ### Database choice
 
-If you want to use SQLite, change the database section in settings.py to look like this:
+If you want to use SQLite, change the database section in *settings.py* to look like this:
 
 ```
 DATABASES = {
@@ -31,11 +31,11 @@ DATABASES = {
 }
 ```
 
-If you instead want to use MySQL or PostgreSQL, change the above section appropriately and provide the database username and password in the above mentioned secrets.py file.
+If you instead want to use MySQL or PostgreSQL, change this section appropriately. The database username and password should be provided in the above mentioned *secrets.py* file.
 
 ### Run the server
 
-After chosing the database, run this in the LinkBookmarkWebApp folder to create the necessary database tables:
+After choosing the database, run this in the LinkBookmarkWebApp folder to create the necessary database tables:
 
 ```
 ./manage.py migrate
