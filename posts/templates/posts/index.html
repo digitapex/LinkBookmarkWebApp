@@ -1,0 +1,157 @@
+<!-- <button onClick="window.location.href='add_page'">Add</button> -->
+<!doctype html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+        crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container">
+        <a href="{% url 'add_page' %}" class="btn btn-default glyphicon glyphicon-plus"></a>
+        <input type="text" id="searchBar" onkeyup="searchFunction()" placeholder="Search..." autofocus>
+        <a href="{% url 'logout' %}" class="btn btn-default pull-right">Log out</a>
+        <table>
+            <tbody id="sortable">
+                {% for post in posts %}
+                <tr class="myClass">
+                    <td class="tableButtons">
+                        <a class="btn btn-default glyphicon glyphicon-edit" href="{% url 'edit' post.id %}"></a>
+                    </td>
+                    <td class="tableButtons">
+                        <a class="btn btn-default glyphicon glyphicon-trash" href="{% url 'delete' post.id %}"></a>
+                    </td>
+                    <td class="tableButtons">
+                        <span class="handle glyphicon glyphicon-th"></span>
+                    </td>
+                    <td class="texts col-md-6">
+                        <a href="{{post.link}}">{{post.link}}</a>
+                    </td>
+                    <td class="texts form-inline col-md-6">{{post.description}}</td>
+                    <td class="postId" style="display:none">{{post.id}}</td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <style>
+        #sortable {
+            padding: 0;
+            margin: 0;
+        }
+
+
+
+        .texts {
+            padding-right: 20px;
+        }
+
+        /* td{
+        border: 1px solid black;
+    } */
+
+        table {
+            border-spacing: collapse;
+            border-spacing: 0;
+        }
+
+
+
+        .handle {
+            padding: 5px;
+            cursor: move;
+        }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script>
+
+        function searchFunction() {
+            searchBar = document.getElementById("searchBar");
+            filter = searchBar.value.toLowerCase();
+            listItems = document.getElementsByTagName("tr");
+            for (i = 0; i < listItems.length; i++) {
+                text = listItems[i].innerText.toLowerCase();
+                if (text.indexOf(filter) > -1) {
+                    listItems[i].style.display = "";
+                } else {
+                    listItems[i].style.display = "none";
+                }
+            }
+        }
+
+
+
+        $(function () {
+
+            // when returning with back, perform filter because text in search field still remains
+            searchFunction();
+
+            $("#sortable").sortable({
+                axis: "y",
+                handle: ".handle"
+            });
+
+            // needed to preserve correct widths when dragging
+            // https://stackoverflow.com/questions/11146000/jqueryui-sortable-on-table-rows-shrinks-them-while-being-dragged
+            $('td').each(function () {
+                var totalWidth = $(this).outerWidth();
+                //console.log($(this).width() + ", " + totalWidth);
+                $(this).css('width', totalWidth + 'px');
+            });
+
+            $("#sortable").on("sortupdate", function (event, ui) {
+                var ids = [];
+                $(".myClass").each(function () {
+                    ids.push($(this).find('td.postId').text());
+                    // console.log($(this).find('span').text());
+                });
+                // alert(ids)
+                $.ajax({
+                    url: '/sort/',
+                    type: "POST",
+                    dataType: "json",
+                    data: JSON.stringify({ paramName: ids }),
+                    // data: ids,
+                    success: function (response) { },
+                    // what to do when the call is complete ( you can right your clean from code here)
+                    complete: function () { },
+                    // what to do when there is an error
+                    error: function (xhr, textStatus, thrownError) { }
+                });
+
+            });
+
+            // $('.myId').click(function () {
+            //     var text = $(this).find('span').text();
+            //     $.ajax({
+            //         url: 'http://127.0.0.1:8000/sort/',
+            //         type: "POST",
+            //         data: text,
+            //         success: function (response) { },
+            //         // what to do when the call is complete ( you can right your clean from code here)
+            //         complete: function () { },
+            //         // what to do when there is an error
+            //         error: function (xhr, textStatus, thrownError) { }
+            //     });
+            // })
+        });
+
+    </script>
+
+</body>
+
+</html>
