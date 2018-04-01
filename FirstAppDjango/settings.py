@@ -82,8 +82,8 @@ DATABASES = {
         # 'ENGINE': 'django.db.backends.mysql',
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'notesdatabase',
-        'USER': DATABASE_USER,
-        'PASSWORD' : DATABASE_PASSWORD,
+        'USER': os.environ.get('DATABASE_USER'),
+        'PASSWORD' : os.environ.get('DATABASE_PASSWORD'),
         'HOST' : 'localhost',
     }
 }
