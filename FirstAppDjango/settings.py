@@ -75,6 +75,10 @@ WSGI_APPLICATION = 'FirstAppDjango.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
+import dj_database_url
+DATABASES['default'] =  dj_database_url.config()
+
+
 DATABASES = {
     'default': {
         # 'ENGINE': 'django.db.backends.sqlite3',
@@ -84,7 +88,6 @@ DATABASES = {
         'NAME': 'notesdatabase',
         'USER': os.environ.get('DATABASE_USER'),
         'PASSWORD' : os.environ.get('DATABASE_PASSWORD'),
-        'HOST' : '',
     }
 }
 
