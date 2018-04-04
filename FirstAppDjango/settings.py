@@ -84,7 +84,7 @@ DATABASES = {
         'NAME': 'notesdatabase',
         'USER': os.environ.get('DATABASE_USER'),
         'PASSWORD' : os.environ.get('DATABASE_PASSWORD'),
-        'HOST' : 'localhost',
+        'HOST' : '',
     }
 }
 
