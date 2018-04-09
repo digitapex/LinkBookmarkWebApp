@@ -49,10 +49,4 @@ And finally, run the server:
 
 Now you can go to <http://localhost:8000/> to view the app.
 
-Optionally, you can change the port:
-
-```
-./manage.py runserver 8080
-```
-
 
