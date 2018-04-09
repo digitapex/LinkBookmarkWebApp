@@ -41,7 +41,7 @@ After choosing the database, run this in the LinkBookmarkWebApp folder to create
 ./manage.py migrate
 ```
 
-And finally, run the server:
+Finally, run the server:
 
 ```
 ./manage.py runserver
