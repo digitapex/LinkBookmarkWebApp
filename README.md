@@ -47,6 +47,6 @@ And finally, run the server:
 ./manage.py runserver
 ```
 
-Now you can go to <http://localhost:8000/> to view the app.
+Now go to <http://localhost:8000/> to view the app.
 
 
