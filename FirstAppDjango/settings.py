@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'default_key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['linksbookmarks.herokuapp.com']
+ALLOWED_HOSTS = ['linksbookmarks.herokuapp.com', 'localhost']
 
 
 # Application definition
@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'FirstAppDjango.wsgi.application'
 import dj_database_url
 # DATABASES['default'] =  dj_database_url.config()
 
-DATABASES = { 'default': dj_database_url.config() }
+DATABASES = { 'default': dj_database_url.config(default='postgres://postgres:post2@localhost:5432/notesdatabase') }
 
 # DATABASES = {
 #     'default': {
