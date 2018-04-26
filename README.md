@@ -20,11 +20,15 @@ Then in the *settings.py* file change these two lines:
 
 1. Change the secret key by changing *default_key* to your secret key
 
-`SECRET_KEY = os.environ.get('SECRET_KEY', 'default_key')`
+```
+SECRET_KEY = os.environ.get('SECRET_KEY', 'default_key')
+```
 
 2. Change the postgres_username, postgres_password and database_name to correspond to your local PostgreSQL installation (or alternativly use SQLite):
 
-`DATABASES = { 'default': dj_database_url.config(default='postgres://postgres_user:postgres_password@localhost:5432/database_name') }`
+```
+DATABASES = { 'default': dj_database_url.config(default='postgres://postgres_user:postgres_password@localhost:5432/database_name') }
+```
 
 After that run:
 
