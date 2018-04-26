@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'FirstAppDjango.wsgi.application'
 import dj_database_url
 # DATABASES['default'] =  dj_database_url.config()
 
-DATABASES = { 'default': dj_database_url.config(default='postgres://postgres:post2@localhost:5432/notesdatabase') }
+DATABASES = { 'default': dj_database_url.config(default='postgres://postgres_user:postgres_password@localhost:5432/database_name') }
 
 # DATABASES = {
 #     'default': {

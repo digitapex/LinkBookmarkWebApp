@@ -1,8 +1,8 @@
 # Links Bookmarks Web App
 
-## Local installation
+Available online at <https://linksbookmarks.herokuapp.com/>
 
-It's recommended to use the virtual environment for the installation.
+## Local installation
 
 Perform these steps to create and activate the virtual environment, clone this repository and install the dependecies:
 
@@ -16,35 +16,19 @@ cd LinkBookmarkWebApp
 pip install -r requirements.txt
 ```
 
-Then provide the SECRET_KEY in the *secrets.py* file, which needs to be in the same folder as *settings.py* (the *secrets.py.template* file is provided for this purpose).
+Then in the *settings.py* file change these two lines:
 
-### Database choice
+1. Change the secret key by changing *default_key* to your secret key
+`SECRET_KEY = os.environ.get('SECRET_KEY', 'default_key')`
 
-If you want to use SQLite, change the database section in *settings.py* to look like this:
+2. Change the postgres_username, postgres_password and database_name to correspond to your local PostgreSQL installation (or alternativly use SQLite):
+DATABASES = { 'default': dj_database_url.config(default='postgres://postgres_user:postgres_password@localhost:5432/database_name') }
 
-```
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-```
-
-If you instead want to use MySQL or PostgreSQL, change this section appropriately. The database username and password should be provided in the above mentioned *secrets.py* file.
-
-### Run the server
-
-After choosing the database, run this in the LinkBookmarkWebApp folder to create the necessary database tables:
+After that run:
 
 ```
 ./manage.py migrate
-```
-
-Finally, run the server:
-
-```
 ./manage.py runserver
 ```
 
-Now go to <http://localhost:8000/> to view the app.
+Finally go to <http://localhost:8000/> to view the app.
